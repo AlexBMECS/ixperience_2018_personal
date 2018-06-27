@@ -12,3 +12,6 @@ This application will have the following functionalities:
 most popular baby names for boys and girls for a certain year (the year is in the filename)
 - For the name provided as an argument, print out how many years it's been among the most popular among boys and girls
 """
+num  = 1990 
+for i in range(1):
+    

@@ -26,37 +26,42 @@ are valid, i.e., they need to be empty and be inside the board.
 
 Hint: You can use a deque (in the module collections) to rotate between player 1 and 2
 """
-import collections
+
 #%%
-def check_win(bort):
+#def check_win():
+    bort = [
+        [" ", " ", " "],
+        [" ", " ", " "],
+        [" ", " ", " "]
+]
     won = False
     lst = range(len(bort))
     
     for n in lst:
-       if bort[n,0] == ["X","X","X"] or ["O","O","O"]:
+       if bort[n] == ["X","X","X"] or ["O","O","O"]:
            won = True
            
-    if bort[0,0] == "X" and bort[1,0] == "X" and bort[2,0] == "X":
+    if bort[0][0] == "X" and bort[1][0] == "X" and bort[2][0] == "X":
            won = True
-    if bort[0,1] == "X" and bort[1,1] == "X" and bort[2,1] == "X":
+    if bort[0][1] == "X" and bort[1][1] == "X" and bort[2][1] == "X":
            won = True
-    if bort[0,2] == "X" and bort[1,2] == "X" and bort[2,2] == "X":
+    if bort[0][2] == "X" and bort[1][2] == "X" and bort[2][2] == "X":
            won = True
-    if bort[0,0] == "O" and bort[1,0] == "O" and bort[2,0] == "O":
+    if bort[0][0] == "O" and bort[1][0] == "O" and bort[2][0] == "O":
            won = True
-    if bort[0,1] == "O" and bort[1,1] == "O" and bort[2,1] == "O":
+    if bort[0][1] == "O" and bort[1][1] == "O" and bort[2][1] == "O":
            won = True
-    if bort[0,2] == "O" and bort[1,2] == "O" and bort[2,2] == "O":
+    if bort[0][2] == "O" and bort[1][2] == "O" and bort[2][2] == "O":
            won = True
            
-    if bort[0,0] == "O" and bort[1,1] == "O" and bort[2,2] == "O":
+    if bort[0][0] == "O" and bort[1][1] == "O" and bort[2][2] == "O":
            won = True   
-    if bort[0,0] == "X" and bort[1,1] == "X" and bort[2,2] == "X":
+    if bort[0][0] == "X" and bort[1][1] == "X" and bort[2][2] == "X":
            won = True
     
-    if bort[0,2] == "O" and bort[1,1] == "O" and bort[2,0] == "O":
+    if bort[0][2] == "O" and bort[1][1] == "O" and bort[2][0] == "O":
            won = True   
-    if bort[0,2] == "X" and bort[1,1] == "X" and bort[2,0] == "X":
+    if bort[0][2] == "X" and bort[1][1] == "X" and bort[2][0] == "X":
            won = True   
            
     return won        
@@ -77,6 +82,11 @@ def game():
 ]
     
     while over != True and num_moves < 9:
+        if player1 == True:
+            print("Player 1 is up")
+        else:
+            print("Player 2 is up")
+            
         new_instruction = input("Please input the next players coordinates")
         
         coords = new_instruction.split(",")
@@ -84,12 +94,18 @@ def game():
         counter = 0
         
         for i in coords:
-            coord_int[counter] = int(coords)
+            coord_int[counter] = int(i)
         
+        r = coord_int[0]
+        c = coord_int[1]
+       
+        print(r)
         if player1 == True:
             print("Player 1 is up")
             piece = "X"
-            board[coord_int[0], coord_int[1]] = piece
+            board[r][c] = piece
+            
+            print(board)
             
             over = check_win(board)
             if over == True:
@@ -97,15 +113,14 @@ def game():
         else:
             print("Player 2 is up")
             piece = "O"
-            board[coord_int[0], coord_int[1]] = piece
+            board[r][c] = piece
             
             over = check_win(board)
             if over == True:
                 winner = "Player 2"
             
         num_moves = num_moves+1
-        player1 = !player1
-        print(board)
+        player1 = not player1
     
 
 
